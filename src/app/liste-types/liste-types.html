@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+
+      @if (erreur) {
+        <div class="alert alert-danger">
+          <strong>{{ erreur }}</strong>
+        </div>
+      }
+
+      <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
+        <app-update-type
+          [typePharmacie]="updatedType"
+          (typeUpdated)="typeUpdated($event)"
+          [ajout]="ajout">
+        </app-update-type>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom du type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of types; track t.idType) {
+            <tr>
+              <td>{{ t.idType }}</td>
+              <td>{{ t.nomType }}</td>
+              <td class="text-nowrap">
+                <button class="btn btn-success btn-sm" (click)="updateType(t)">Editer</button>
+                <button class="btn btn-danger btn-sm ms-2" (click)="supprimerType(t)">Supprimer</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

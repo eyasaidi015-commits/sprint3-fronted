@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-body">
+      <h3>Ajouter une pharmacie</h3>
+      <form #f="ngForm" (ngSubmit)="addPharmacie()">
+        <div class="mb-3">
+          <label class="form-label">Nom</label>
+          <input type="text" class="form-control" name="nomPharmacie" [(ngModel)]="newPharmacie.nomPharmacie" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Adresse</label>
+          <input type="text" class="form-control" name="adressePharmacie" [(ngModel)]="newPharmacie.adressePharmacie" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Téléphone</label>
+          <input type="text" class="form-control" name="telephonePharmacie" [(ngModel)]="newPharmacie.telephonePharmacie" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date d'ouverture</label>
+          <input type="date" class="form-control" name="dateOuverture" [(ngModel)]="newPharmacie.dateOuverture" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Type</label>
+          <select class="form-select" name="idType" [(ngModel)]="idType" required>
+            <option [ngValue]="undefined" disabled>-- Choisir un type --</option>
+            @for (t of types; track t.idType) {
+              <option [ngValue]="t.idType">{{ t.nomType }}</option>
+            }
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="f.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-body">
+      <h3>Rechercher une pharmacie</h3>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label">Rechercher par type</label>
+          <select class="form-select" [ngModel]="idTypeFiltre" (ngModelChange)="onChangeType($event)">
+            <option [ngValue]="undefined">Tous</option>
+            @for (t of types; track t.idType) {
+              <option [ngValue]="t.idType">{{ t.nomType }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Rechercher par nom</label>
+          <input type="text" class="form-control" placeholder="Nom..." [(ngModel)]="searchTerm">
+        </div>
+      </div>
+
+      <h2>Nombre : {{ (pharmacies | searchFilter: searchTerm).length }}</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Téléphone</th>
+            <th>Date d'ouverture</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of pharmacies | searchFilter: searchTerm; track p.idPharmacie; let i = $index) {
+            <tr>
+              <td>{{ i }}</td>
+              <td>{{ p.idPharmacie }}</td>
+              <td>{{ p.nomPharmacie }}</td>
+              <td>{{ p.adressePharmacie }}</td>
+              <td>{{ p.telephonePharmacie }}</td>
+              <td>{{ p.dateOuverture | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ p.typePharmacie.nomType }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
